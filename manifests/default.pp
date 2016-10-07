@@ -1,17 +1,19 @@
 node default {
 
-### This changes the system default setttings, and works only for newly created users
-# 	file { "50_unity-settings-daemon.gschema.override":
-# 		ensure  => file,
-# 		path    => "/usr/share/glib-2.0/schemas/50_unity-settings-daemon.gschema.override",
-# 		content => "[com.canonical.Unity.Launcher]
-# favorites=['application://org.gnome.Nautilus.desktop', 'application://gnome-terminal.desktop', 'application://firefox.desktop', 'unity://running-apps', 'unity://expo-icon', 'unity://devices']
-# ",
-# 	} ->
-# 	exec { "glib-compile-schemas":
-# 		command => "/usr/bin/glib-compile-schemas /usr/share/glib-2.0/schemas/",
-# 		logoutput => on_failure,
-# 	}
+	##### set Launcher favorite (app icons on Launcher bar)
+
+	### This changes the system default setttings, and works only for newly created users
+	# 	file { "50_unity-settings-daemon.gschema.override":
+	# 		ensure  => file,
+	# 		path    => "/usr/share/glib-2.0/schemas/50_unity-settings-daemon.gschema.override",
+	# 		content => "[com.canonical.Unity.Launcher]
+	# favorites=['application://org.gnome.Nautilus.desktop', 'application://gnome-terminal.desktop', 'application://firefox.desktop', 'unity://running-apps', 'unity://expo-icon', 'unity://devices']
+	# ",
+	# 	} ->
+	# 	exec { "glib-compile-schemas":
+	# 		command => "/usr/bin/glib-compile-schemas /usr/share/glib-2.0/schemas/",
+	# 		logoutput => on_failure,
+	# 	}
 
 	### This works when user is not logged in yet
 	exec { 'set-launcher-favorites-dbus':

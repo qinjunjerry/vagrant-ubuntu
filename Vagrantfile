@@ -14,7 +14,7 @@ Vagrant.configure("2") do |config|
   # boxes at https://atlas.hashicorp.com/search.
   config.vm.box = "ubuntu64-16.04.1"
 
-  config.vm.hostname = "JunQin-Vagrant-VM"
+  config.vm.hostname = "ubuntu"
 
   # Disable automatic box update checking. If you disable this, then
   # boxes will only be checked for updates when the user runs
@@ -69,8 +69,8 @@ Vagrant.configure("2") do |config|
   #    ==> default: ttyname failed
   #    ==> default: :
   #    ==> default: Inappropriate ioctl for device
-  # see: https://github.com/mitchellh/vagrant/issues/1673
-  # see: https://www.vagrantup.com/docs/vagrantfile/ssh_settings.html
+  # see also: https://github.com/mitchellh/vagrant/issues/1673
+  # see also: https://www.vagrantup.com/docs/vagrantfile/ssh_settings.html
   config.ssh.shell = 'bash'
 
   # Enable provisioning with a shell script. Additional provisioners such as

@@ -1,0 +1,13 @@
+---
+:backends:
+  - yaml
+
+:hierarchy:
+  - fqdn/%{fqdn}
+  - role/%{role}
+  - osfamily/%{osfamily}
+  - common
+
+:yaml:
+  :datadir:
+    '/vagrant/hiera'

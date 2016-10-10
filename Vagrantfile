@@ -85,6 +85,7 @@ Vagrant.configure("2") do |config|
     #puppet.manifest_file  = "default.pp"
 
     puppet.module_path    = "modules"
+    puppet.hiera_config_path = "hiera.yaml"
   end
 
 end

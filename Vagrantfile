@@ -76,6 +76,14 @@ Vagrant.configure("2") do |config|
   # Enable provisioning with a shell script. Additional provisioners such as
   # Puppet, Chef, Ansible, Salt, and Docker are also available. Please see the
   # documentation for more information about their specific syntax and use.
+
+  # Work around a hostname issue in ubuntu,
+  # see also: https://bugs.launchpad.net/ubuntu/+source/livecd-rootfs/+bug/1561250
+  $script = <<SCRIPT
+sed -e 's/127.0.0.1\tlocalhost$/127.0.0.1\tlocalhost ubuntu/g' /etc/hosts > /tmp/hosts
+mv /tmp/hosts /etc/hosts
+SCRIPT
+  config.vm.provision "shell", inline: $script
   config.vm.provision "shell", path: "bootstrap.sh"
 
   config.vm.provision :puppet do |puppet|

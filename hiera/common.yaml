@@ -1,13 +1,16 @@
 ---
 
 classes:
+  - archive
+  - java
+  - eclipse
   - stdlib
   - launchbar
-
 
 launchbar::favorites:
   - application://org.gnome.Nautilus.desktop
   - application://gnome-terminal.desktop
+  - application://eclipse.desktop
   - application://firefox.desktop
   - unity://running-apps
   - unity://expo-icon

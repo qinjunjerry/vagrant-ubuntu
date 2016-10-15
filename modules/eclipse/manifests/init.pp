@@ -21,6 +21,8 @@ class eclipse (
   $filename   = "eclipse-${packagetype}-${releasename}-${releaselevel}-linux-gtk${archsuffix}"
   $localfile  = "/opt/${filename}.tar.gz"
   $remotefile = "${mirrorurl}/eclipse/technology/epp/downloads/release/${releasename}/${releaselevel}/${filename}.tar.gz"
+  # get plugins from hiera
+  $pluginnames = keys($plugins)
 
   # first, create a directory
   file { "$installdir/$filename":
@@ -41,15 +43,14 @@ class eclipse (
     ensure => 'link',
     target => "$installdir/$filename",
   } ->
+  # create desktop file to be used on the launcher
   file { '/usr/share/applications/eclipse.desktop':
     ensure  => $ensure,
     content => template('eclipse/eclipse.desktop.erb'),
     mode    => 644,
     require => Archive[$localfile]
-  }
-
-  # get plugins from hiera and install them
-  $pluginnames = keys($plugins)
+  } ->
+  # install eclipse plugins
   eclipse::plugins { $pluginnames:
     plugins     => $plugins,
     releasename => $releasename,

@@ -7,6 +7,12 @@ classes:
   - stdlib
   - launchbar
 
+eclipse::plugins:
+  pydev: {iu: 'org.python.pydev.feature.feature.group', repository: 'http://pydev.org/updates'}
+  geppetto: {iu: 'com.puppetlabs.geppetto.feature.group', repository: 'http://geppetto-updates.puppetlabs.com/4.x'}
+  dltk-ruby: {iu: 'org.eclipse.dltk.ruby.feature.group'}
+
+
 launchbar::favorites:
   - application://org.gnome.Nautilus.desktop
   - application://gnome-terminal.desktop

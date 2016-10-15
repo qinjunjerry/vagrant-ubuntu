@@ -1,6 +1,6 @@
 # Class: eclipse
 #
-# This module installs Eclipse
+# This module installs Eclipse and plugins
 #
 class eclipse (
   $packagetype  = 'jee',
@@ -8,6 +8,7 @@ class eclipse (
   $releaselevel = '1a',
   $mirrorurl    = 'http://ftp.fau.de',
   $installdir   = '/opt',
+  $plugins      = {},
   $ensure       = present
 ) {
 
@@ -45,6 +46,13 @@ class eclipse (
     content => template('eclipse/eclipse.desktop.erb'),
     mode    => 644,
     require => Archive[$localfile]
+  }
+
+  # get plugins from hiera and install them
+  $pluginnames = keys($plugins)
+  eclipse::plugins { $pluginnames:
+    plugins     => $plugins,
+    releasename => $releasename,
   }
 
 }

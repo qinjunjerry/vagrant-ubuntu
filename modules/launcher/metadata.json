@@ -1,9 +1,9 @@
 {
-  "name": "launchar",
+  "name": "launcher",
   "version": "0.0.1",
   "author": "Jun QIN",
   "license": "Apache-2.0",
-  "summary": "A module to manage launchar settings on Ubuntu",
+  "summary": "A module to manage launcher settings on Ubuntu",
   "source": "",
   "project_page": "",
   "issues_url": "",

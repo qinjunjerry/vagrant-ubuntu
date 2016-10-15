@@ -1,6 +1,6 @@
-# This puppet module manages ubuntu launchbar
+# This puppet module manages ubuntu launcher
 
-class launchbar (
+class launcher (
   $user      = 'vagrant',
   $favorites = [],
 ) {

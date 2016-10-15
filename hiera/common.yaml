@@ -5,7 +5,7 @@ classes:
   - java
   - eclipse
   - stdlib
-  - launchbar
+  - launcher
 
 eclipse::plugins:
   pydev: {iu: 'org.python.pydev.feature.feature.group', repository: 'http://pydev.org/updates'}
@@ -13,7 +13,7 @@ eclipse::plugins:
   dltk-ruby: {iu: 'org.eclipse.dltk.ruby.feature.group'}
 
 
-launchbar::favorites:
+launcher::favorites:
   - application://org.gnome.Nautilus.desktop
   - application://gnome-terminal.desktop
   - application://eclipse.desktop

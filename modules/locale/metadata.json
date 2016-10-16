@@ -1,0 +1,21 @@
+{
+  "name": "locale",
+  "version": "0.0.1",
+  "author": "Jun QIN",
+  "license": "Apache-2.0",
+  "summary": "A module to manage locale settings on Ubuntu",
+  "source": "",
+  "project_page": "",
+  "issues_url": "",
+  "tags": ["locale", "gsettings", "Ubuntu"],
+  "operatingsystem_support": [
+    {
+    "operatingsystem": "Ubuntu",
+    "operatingsystemrelease": [ "16.04"]
+    }
+   ],
+  "dependencies": [
+    { "name": "puppetlabs/stdlib", "version_requirement": ">= 4.12.0 < 5.0.0" },
+  ],
+  "data_provider": "hiera"
+}

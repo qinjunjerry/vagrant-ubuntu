@@ -6,11 +6,12 @@ classes:
   - eclipse
   - stdlib
   - launcher
+  - locale
 
 eclipse::plugins:
   pydev: {iu: 'org.python.pydev.feature.feature.group', repository: 'http://pydev.org/updates'}
-  geppetto: {iu: 'com.puppetlabs.geppetto.feature.group', repository: 'http://geppetto-updates.puppetlabs.com/4.x'}
-  dltk-ruby: {iu: 'org.eclipse.dltk.ruby.feature.group'}
+  #geppetto: {iu: 'com.puppetlabs.geppetto.feature.group', repository: 'http://geppetto-updates.puppetlabs.com/4.x'}
+  #dltk-ruby: {iu: 'org.eclipse.dltk.ruby.feature.group'}
 
 
 launcher::favorites:

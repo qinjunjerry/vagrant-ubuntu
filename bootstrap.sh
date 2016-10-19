@@ -9,11 +9,8 @@ if [ ! -f /etc/apt/sources.list.d/puppetlabs-pc1.list ]; then
 fi
 
 apt-get update
-# install puppet 4
+# install puppet 4 (and ruby)
 apt-get install -y puppet-agent
-
-# install puppet (and ruby)
-#apt-get install -y puppet
 
 # install r10k from Ruby Gems
 /opt/puppetlabs/puppet/bin/gem install r10k

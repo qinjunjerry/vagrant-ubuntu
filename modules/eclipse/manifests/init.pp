@@ -47,7 +47,7 @@ class eclipse (
   file { '/usr/share/applications/eclipse.desktop':
     ensure  => $ensure,
     content => template('eclipse/eclipse.desktop.erb'),
-    mode    => 644,
+    mode    => '644',
     require => Archive[$localfile]
   } ->
   # install eclipse plugins

@@ -94,6 +94,12 @@ SCRIPT
 
     puppet.module_path    = "modules"
     puppet.hiera_config_path = "hiera.yaml"
+
+    # needed by puppet 4
+    puppet.binary_path    = "/opt/puppetlabs/bin"
+    puppet.environment_path = "environments"
+    puppet.environment = "production"
+    # puppet.options = "--verbose --debug"
   end
 
 end

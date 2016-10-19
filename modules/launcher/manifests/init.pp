@@ -1,12 +1,9 @@
 # This puppet module manages ubuntu launcher
 
 class launcher (
-  $user      = 'vagrant',
-  $favorites = [],
+  String $user             = 'vagrant',
+  Array[String] $favorites = [],
 ) {
-	validate_string($user)
-	validate_array($favorites)
-
 	##### set Launcher favorite (app icons on Launcher bar)
 
 	if size($favorites) > 0 {

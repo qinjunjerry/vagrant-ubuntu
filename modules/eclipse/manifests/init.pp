@@ -21,8 +21,9 @@ class eclipse (
   $filename   = "eclipse-${packagetype}-${releasename}-${releaselevel}-linux-gtk${archsuffix}"
   $localfile  = "/opt/${filename}.tar.gz"
   $remotefile = "${mirrorurl}/eclipse/technology/epp/downloads/release/${releasename}/${releaselevel}/${filename}.tar.gz"
+
   # get plugins from hiera
-  $pluginnames = keys($plugins)
+  #$pluginnames = keys($plugins)
 
   # first, create a directory
   file { "$installdir/$filename":
@@ -49,11 +50,22 @@ class eclipse (
     content => template('eclipse/eclipse.desktop.erb'),
     mode    => '644',
     require => Archive[$localfile]
-  } ->
-  # install eclipse plugins
-  eclipse::plugins { $pluginnames:
-    plugins     => $plugins,
-    releasename => $releasename,
   }
+
+  # install eclipse plugins with iteration in puppet 4
+  $plugins.each |$name, $plugin| {
+    eclipse::plugin {$name:
+      iu          => $plugin['iu'],
+      repository  => $plugin['repository'],
+      releasename => $releasename,
+      require     => File["$installdir/eclipse"]
+    }
+  }
+
+  # install eclipse plugins (puppet 3)
+  #eclipse::plugins { $pluginnames:
+  #  plugins     => $plugins,
+  #  releasename => $releasename,
+  #}
 
 }

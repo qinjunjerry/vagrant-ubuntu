@@ -7,6 +7,15 @@ classes:
   - stdlib
   - launcher
   - locale
+  - packages
+
+packages::packages:
+  build-essential: present
+  libssl-dev     : present
+  libffi-dev     : present
+  python-dev     : present
+  git            : present
+
 
 eclipse::plugins:
   pydev: {iu: 'org.python.pydev.feature.feature.group', repository: 'http://pydev.org/updates'}

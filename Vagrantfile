@@ -12,9 +12,7 @@ Vagrant.configure("2") do |config|
 
   # Every Vagrant development environment requires a box. You can search for
   # boxes at https://atlas.hashicorp.com/search.
-  config.vm.box = "ubuntu64-16.04.1"
-
-  config.vm.hostname = "ubuntu"
+  config.vm.box = "ubuntu-16.04-amd64-virtualbox"
 
   # Disable automatic box update checking. If you disable this, then
   # boxes will only be checked for updates when the user runs
@@ -50,7 +48,10 @@ Vagrant.configure("2") do |config|
     vb.gui = true
 
     # Customize the amount of memory on the VM:
-    vb.memory = "3096"
+    vb.memory = "4096"
+
+    # Customize the number of CPUs
+    vb.cpus = 2
   end
   #
   # View the documentation for the provider you are using for more
@@ -76,14 +77,11 @@ Vagrant.configure("2") do |config|
   # Enable provisioning with a shell script. Additional provisioners such as
   # Puppet, Chef, Ansible, Salt, and Docker are also available. Please see the
   # documentation for more information about their specific syntax and use.
+  # config.vm.provision "shell", inline: <<-SHELL
+  #   apt-get update
+  #   apt-get install -y apache2
+  # SHELL
 
-  # Work around a hostname issue in ubuntu,
-  # see also: https://bugs.launchpad.net/ubuntu/+source/livecd-rootfs/+bug/1561250
-  $script = <<SCRIPT
-sed -e 's/127.0.0.1\tlocalhost$/127.0.0.1\tlocalhost ubuntu/g' /etc/hosts > /tmp/hosts
-mv /tmp/hosts /etc/hosts
-SCRIPT
-  config.vm.provision "shell", inline: $script
   config.vm.provision "shell", path: "bootstrap.sh"
 
   config.vm.provision :puppet do |puppet|

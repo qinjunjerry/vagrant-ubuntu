@@ -1,11 +1,20 @@
-# This puppet module manages ubuntu launcher
+# This puppet module manages ubuntu gnome settings
 
-class launcher (
+class gsettings (
   String $user             = 'vagrant',
+  String $time_format      = '24-hour',
   Array[String] $favorites = [],
 ) {
-	##### set Launcher favorite (app icons on Launcher bar)
 
+	##### set time format
+	exec { 'set-time-format':
+		user      => $user,
+		command   => join( ["/usr/bin/dbus-run-session /usr/bin/gsettings set com.canonical.indicator.datetime time-format", " ", $time_format] ),
+		logoutput => on_failure,
+		require   => Package['ubuntu-desktop']
+	}
+
+	##### set Launcher favorite (app icons on Launcher bar)
 	if size($favorites) > 0 {
 		### This changes the system default setttings, and works only for newly created users
 		# 	file { "50_unity-settings-daemon.gschema.override":
@@ -22,9 +31,10 @@ class launcher (
 
 		### This works when user is not logged in yet
 		exec { 'set-launcher-favorites-dbus':
-			user    => $user,
-			command => join( ["/usr/bin/dbus-run-session /usr/bin/gsettings set com.canonical.Unity.Launcher favorites \"[\'", join($favorites,'\',\''), "\']\""] ),
+			user      => $user,
+			command   => join( ["/usr/bin/dbus-run-session /usr/bin/gsettings set com.canonical.Unity.Launcher favorites \"[\'", join($favorites,'\',\''), "\']\""] ),
 			logoutput => on_failure,
+			require   => Package['ubuntu-desktop']
 		}
 
 		### This works only when user logged into X: meaning there is an active dbus session seen in

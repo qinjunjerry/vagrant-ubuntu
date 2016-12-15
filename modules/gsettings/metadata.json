@@ -1,13 +1,13 @@
 {
-  "name": "launcher",
+  "name": "gsettings",
   "version": "0.0.1",
   "author": "Jun QIN",
   "license": "Apache-2.0",
-  "summary": "A module to manage launcher settings on Ubuntu",
+  "summary": "A module to manage gsettings on Ubuntu",
   "source": "",
   "project_page": "",
   "issues_url": "",
-  "tags": ["launchbar", "gsettings", "Ubuntu"],
+  "tags": ["gsettings", "Ubuntu"],
   "operatingsystem_support": [
     {
     "operatingsystem": "Ubuntu",

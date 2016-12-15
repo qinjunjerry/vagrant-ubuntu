@@ -1,20 +1,24 @@
 ---
 
 classes:
+  - stdlib
   - archive
   - java
-  - eclipse
-  - stdlib
-  - launcher
-  - locale
   - packages
+  - eclipse
+  - gsettings
 
-packages::packages:
-  build-essential: present
-  libssl-dev     : present
-  libffi-dev     : present
-  python-dev     : present
-  git            : present
+packages::toinstall:
+  - ubuntu-desktop
+  - git
+  - python-lxml
+  - python-paramiko
+  - python-suds
+  - python-mysqldb
+
+packages::toremove:
+  - python-pip
+
 
 
 eclipse::plugins:
@@ -23,7 +27,7 @@ eclipse::plugins:
   #dltk-ruby: {iu: 'org.eclipse.dltk.ruby.feature.group'}
 
 
-launcher::favorites:
+gsettings::favorites:
   - application://org.gnome.Nautilus.desktop
   - application://gnome-terminal.desktop
   - application://eclipse.desktop

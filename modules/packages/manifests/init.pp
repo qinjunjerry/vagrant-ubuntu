@@ -3,13 +3,19 @@
 # This module installs simple packages via puppet package resource
 #
 class packages (
-  $packages = {},
+  $toinstall = [],
+  $toremove  = [],
 ) {
 
-  # install eclipse plugins with iteration in puppet 4
-  $packages.each |$name, $ensure| {
+  $toinstall.each |$name| {
     package { $name:
-      ensure => $ensure,
+      ensure => present,
+    }
+  }
+
+  $toremove.each |$name| {
+    package { $name:
+      ensure => absent,
     }
   }
 

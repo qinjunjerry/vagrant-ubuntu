@@ -22,9 +22,11 @@ packages::toremove:
 
 
 eclipse::plugins:
-  pydev: {iu: 'org.python.pydev.feature.feature.group', repository: 'http://pydev.org/updates'}
-  #geppetto: {iu: 'com.puppetlabs.geppetto.feature.group', repository: 'http://geppetto-updates.puppetlabs.com/4.x'}
-  #dltk-ruby: {iu: 'org.eclipse.dltk.ruby.feature.group'}
+  memanalyzer:    {iu: 'org.eclipse.mat.feature.feature.group',      }
+  memcharts:      {iu: 'org.eclipse.mat.chart.feature.feature.group' }
+  dltk-ruby:      {iu: 'org.eclipse.dltk.ruby.feature.group'         }
+  geppetto:       {iu: 'com.puppetlabs.geppetto.feature.group',   repository: 'http://geppetto-updates.puppetlabs.com/4.x'}
+  pydev:          {iu: 'org.python.pydev.feature.feature.group',  repository: 'http://pydev.org/updates'}
 
 
 gsettings::favorites:

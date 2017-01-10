@@ -11,7 +11,8 @@ class gsettings (
 		user      => $user,
 		command   => join( ["/usr/bin/dbus-run-session /usr/bin/gsettings set com.canonical.indicator.datetime time-format", " ", $time_format] ),
 		logoutput => on_failure,
-		require   => Package['ubuntu-desktop']
+		require   => Package['ubuntu-desktop'],
+		unless    => "/usr/bin/dbus-run-session /usr/bin/gsettings get com.canonical.indicator.datetime time-format | grep 24-hour"
 	}
 
 	##### set Launcher favorite (app icons on Launcher bar)
@@ -34,7 +35,8 @@ class gsettings (
 			user      => $user,
 			command   => join( ["/usr/bin/dbus-run-session /usr/bin/gsettings set com.canonical.Unity.Launcher favorites \"[\'", join($favorites,'\',\''), "\']\""] ),
 			logoutput => on_failure,
-			require   => Package['ubuntu-desktop']
+			require   => Package['ubuntu-desktop'],
+			unless    => "/usr/bin/dbus-run-session /usr/bin/gsettings get com.canonical.Unity.Launcher favorites | grep gnome-terminal"
 		}
 
 		### This works only when user logged into X: meaning there is an active dbus session seen in

@@ -3,6 +3,7 @@
 class gsettings (
   String $user             = 'vagrant',
   String $time_format      = '24-hour',
+  String $lock_on_suspend  = 'false',
   Array[String] $favorites = [],
 ) {
 
@@ -12,7 +13,17 @@ class gsettings (
 		command   => join( ["/usr/bin/dbus-run-session /usr/bin/gsettings set com.canonical.indicator.datetime time-format", " ", $time_format] ),
 		logoutput => on_failure,
 		require   => Package['ubuntu-desktop'],
-		unless    => "/usr/bin/dbus-run-session /usr/bin/gsettings get com.canonical.indicator.datetime time-format | grep 24-hour"
+		unless    => "/usr/bin/dbus-run-session /usr/bin/gsettings get com.canonical.indicator.datetime time-format | grep $time_format"
+	}
+
+
+    ##### disable the requirement of passwords when waking from suspend
+	exec { 'set-lock-on-suspend':
+		user      => $user,
+		command   => join( ["/usr/bin/dbus-run-session /usr/bin/gsettings set org.gnome.desktop.screensaver ubuntu-lock-on-suspend", " ", $lock_on_suspend] ),
+		logoutput => on_failure,
+		require   => Package['ubuntu-desktop'],
+		unless    => "/usr/bin/dbus-run-session /usr/bin/gsettings get org.gnome.desktop.screensaver ubuntu-lock-on-suspend | grep $lock_on_suspend"
 	}
 
 	##### set Launcher favorite (app icons on Launcher bar)

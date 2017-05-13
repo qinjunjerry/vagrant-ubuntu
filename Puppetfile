@@ -1,3 +1,5 @@
+moduledir "external"
+
 mod 'puppetlabs-stdlib', :latest
 
 mod 'puppet-archive', :latest

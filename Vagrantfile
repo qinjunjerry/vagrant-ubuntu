@@ -64,8 +64,8 @@ Vagrant.configure("2") do |config|
   #   push.app = "YOUR_ATLAS_USERNAME/YOUR_APPLICATION_NAME"
   # end
 
-  # default is 'bash -l' (login shell)
-  # here set to 'bash' is to avoid error message:
+  # Default is 'bash -l' (login shell)
+  # Here set to 'bash' is to avoid error message:
   #    ==> default: mesg:
   #    ==> default: ttyname failed
   #    ==> default: :
@@ -73,6 +73,9 @@ Vagrant.configure("2") do |config|
   # see also: https://github.com/mitchellh/vagrant/issues/1673
   # see also: https://www.vagrantup.com/docs/vagrantfile/ssh_settings.html
   config.ssh.shell = 'bash'
+  # The above solution requires to use full path of ruby as it is not in $PATH.
+  # Another option which has no such requirements is: 
+  # config.ssh.shell = "bash -c 'BASH_ENV=/etc/profile exec bash'"
 
   # Enable provisioning with a shell script. Additional provisioners such as
   # Puppet, Chef, Ansible, Salt, and Docker are also available. Please see the
@@ -90,6 +93,8 @@ Vagrant.configure("2") do |config|
     #puppet.manifests_path = "manifests"
     #puppet.manifest_file  = "default.pp"
 
+    # modules: the directory for the modules in this repo
+    # external: the directory for the modules downloaded by r10k on demand
     puppet.module_path    = ["modules", "external"]
     puppet.hiera_config_path = "hiera.yaml"
 

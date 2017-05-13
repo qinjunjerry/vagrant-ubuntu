@@ -10,24 +10,20 @@ classes:
 
 packages::toinstall:
   - ubuntu-desktop
+  - terminator
   - git
   - python-lxml
   - python-paramiko
-  - python-suds
-  - python-mysqldb
 
 packages::toremove:
   - python-pip
 
-
-
 eclipse::plugins:
+  pydev:          {iu: 'org.python.pydev.feature.feature.group',  repository: 'http://pydev.org/updates'}
   memanalyzer:    {iu: 'org.eclipse.mat.feature.feature.group',      }
   memcharts:      {iu: 'org.eclipse.mat.chart.feature.feature.group' }
-  dltk-ruby:      {iu: 'org.eclipse.dltk.ruby.feature.group'         }
-  geppetto:       {iu: 'com.puppetlabs.geppetto.feature.group',   repository: 'http://geppetto-updates.puppetlabs.com/4.x'}
-  pydev:          {iu: 'org.python.pydev.feature.feature.group',  repository: 'http://pydev.org/updates'}
-
+# dltk-ruby:      {iu: 'org.eclipse.dltk.ruby.feature.group'         }
+# geppetto:       {iu: 'com.puppetlabs.geppetto.feature.group',   repository: 'http://geppetto-updates.puppetlabs.com/4.x'}
 
 gsettings::favorites:
   - application://org.gnome.Nautilus.desktop

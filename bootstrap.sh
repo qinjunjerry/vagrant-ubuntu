@@ -7,9 +7,6 @@ if [ ! -f /etc/apt/sources.list.d/puppetlabs-pc1.list ]; then
 	dpkg -i $repodeb
 fi
 
-# to avoid errors like: dpkg-preconfigure: unable to re-open stdin: No such file or directory
-#export DEBIAN_FRONTEND=noninteractive
-
 apt-get update
 # install puppet 4 (and ruby)
 apt-get install -y puppet-agent

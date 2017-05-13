@@ -28,6 +28,7 @@ eclipse::plugins:
 gsettings::favorites:
   - application://org.gnome.Nautilus.desktop
   - application://gnome-terminal.desktop
+  - application://terminator.desktop
   - application://eclipse.desktop
   - application://firefox.desktop
   - unity://running-apps

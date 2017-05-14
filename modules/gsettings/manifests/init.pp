@@ -13,7 +13,7 @@ class gsettings (
 		command   => join( ["/usr/bin/dbus-run-session /usr/bin/gsettings set com.canonical.indicator.datetime time-format", " ", $time_format] ),
 		logoutput => on_failure,
 		require   => Package['ubuntu-desktop'],
-		unless    => "/usr/bin/dbus-run-session /usr/bin/gsettings get com.canonical.indicator.datetime time-format | grep $time_format"
+		unless    => join( ["/usr/bin/dbus-run-session /usr/bin/gsettings get com.canonical.indicator.datetime time-format | grep", " ", $time_format] )
 	}
 
 
@@ -23,7 +23,7 @@ class gsettings (
 		command   => join( ["/usr/bin/dbus-run-session /usr/bin/gsettings set org.gnome.desktop.screensaver ubuntu-lock-on-suspend", " ", $lock_on_suspend] ),
 		logoutput => on_failure,
 		require   => Package['ubuntu-desktop'],
-		unless    => "/usr/bin/dbus-run-session /usr/bin/gsettings get org.gnome.desktop.screensaver ubuntu-lock-on-suspend | grep $lock_on_suspend"
+		unless    => join( ["/usr/bin/dbus-run-session /usr/bin/gsettings get org.gnome.desktop.screensaver ubuntu-lock-on-suspend | grep", " ", $lock_on_suspend] )
 	}
 
 	##### set Launcher favorite (app icons on Launcher bar)

@@ -3,7 +3,7 @@
 class gsettings (
   String $user             = 'vagrant',
   String $time_format      = '24-hour',
-  String $lock_on_suspend  = 'false',
+  String $lock_enabled     = 'false',
   Array[String] $favorites = [],
 ) {
 
@@ -17,13 +17,13 @@ class gsettings (
 	}
 
 
-    ##### disable the requirement of passwords when waking from suspend
-	exec { 'set-lock-on-suspend':
+    ##### not asking for passwords when returning from screensaver
+	exec { 'set-lock-enabled':
 		user      => $user,
-		command   => join( ["/usr/bin/dbus-run-session /usr/bin/gsettings set org.gnome.desktop.screensaver ubuntu-lock-on-suspend", " ", $lock_on_suspend] ),
+		command   => join( ["/usr/bin/dbus-run-session /usr/bin/gsettings set org.gnome.desktop.screensaver lock-enabled", " ", $lock_enabled] ),
 		logoutput => on_failure,
 		require   => Package['ubuntu-desktop'],
-		unless    => join( ["/usr/bin/dbus-run-session /usr/bin/gsettings get org.gnome.desktop.screensaver ubuntu-lock-on-suspend | grep", " ", $lock_on_suspend] )
+		unless    => join( ["/usr/bin/dbus-run-session /usr/bin/gsettings get org.gnome.desktop.screensaver lock-enabled | grep", " ", $lock_enabled] )
 	}
 
 	##### set Launcher favorite (app icons on Launcher bar)

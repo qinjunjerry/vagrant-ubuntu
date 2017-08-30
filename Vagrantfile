@@ -27,6 +27,36 @@ Vagrant.configure("2") do |config|
   # Create a private network, which allows host-only access to the machine
   # using a specific IP.
   # config.vm.network "private_network", ip: "192.168.33.10"
+  
+  # Create multiple VMs + additional hard disks
+  # VirutalBoxVMDir = "/Users/jqin/Workspace/VirtualBoxVMs"
+  #
+  # (1..2).each do |i|
+  #   config.vm.define "node#{i}" do |node|
+  #     node.vm.hostname = "node#{i}"
+  #     node.vm.network "private_network", ip: "192.168.56.1#{i}"
+  #
+  #     node.vm.provider "virtualbox" do |vb|
+  #       vb.name = "node#{i}"
+  #     end
+  #   end
+  # end
+  # (1..2).each do |i|
+  #   config.vm.define "node#{i}" do |node|
+  #     node.vm.provider "virtualbox" do |vb|
+  #       ### add additional hard disks
+  #       dataDisk1 = "#{VirutalBoxVMDir}/node#{i}/dataDisk1.vdi"
+  #       # Building disk files if they don't exist
+  #       if not File.exists?(dataDisk1)
+  #         vb.customize ['createhd', '--filename', dataDisk1, '--variant', 'Standard', '--size', 10 * 1024]
+  #         # Adding a SATA controller that allows 4 hard drives
+  #         vb.customize ['storagectl', :id, '--name', 'SATA Controller', '--add', 'sata', '--portcount', 4]
+  #         # Attaching the disks using the SATA controller
+  #         vb.customize ['storageattach', :id,  '--storagectl', 'SATA Controller', '--port', 1, '--device', 0, '--type', 'hdd', '--medium', dataDisk1]
+  #       end
+  #     end
+  #   end
+  # end
 
   # Create a public network, which generally matched to bridged network.
   # Bridged networks make the machine appear as another physical device on
@@ -52,6 +82,10 @@ Vagrant.configure("2") do |config|
 
     # Customize the number of CPUs
     vb.cpus = 2
+
+    # Import the base box into a master VM.
+    vb.linked_clone = true
+
   end
   #
   # View the documentation for the provider you are using for more
@@ -64,19 +98,6 @@ Vagrant.configure("2") do |config|
   #   push.app = "YOUR_ATLAS_USERNAME/YOUR_APPLICATION_NAME"
   # end
 
-  # Default is 'bash -l' (login shell)
-  # Here set to 'bash' is to avoid error message:
-  #    ==> default: mesg:
-  #    ==> default: ttyname failed
-  #    ==> default: :
-  #    ==> default: Inappropriate ioctl for device
-  # see also: https://github.com/mitchellh/vagrant/issues/1673
-  # see also: https://www.vagrantup.com/docs/vagrantfile/ssh_settings.html
-  config.ssh.shell = 'bash'
-  # The above solution requires to use full path of ruby as it is not in $PATH.
-  # Another option which has no such requirements is: 
-  # config.ssh.shell = "bash -c 'BASH_ENV=/etc/profile exec bash'"
-
   # Enable provisioning with a shell script. Additional provisioners such as
   # Puppet, Chef, Ansible, Salt, and Docker are also available. Please see the
   # documentation for more information about their specific syntax and use.
@@ -84,9 +105,9 @@ Vagrant.configure("2") do |config|
   #   apt-get update
   #   apt-get install -y apache2
   # SHELL
+  config.vm.provision "bootstrap", type: "shell", preserve_order: true, path: "bootstrap.sh"
 
-  config.vm.provision "shell", path: "bootstrap.sh"
-
+  # Provision with Puppet
   config.vm.provision :puppet do |puppet|
 
     # these are default setttings, uncomment to set differently
@@ -98,7 +119,7 @@ Vagrant.configure("2") do |config|
     puppet.module_path    = ["modules", "external"]
     puppet.hiera_config_path = "hiera.yaml"
 
-    # needed by puppet 4
+    # needed by puppet 4 or later
     puppet.binary_path    = "/opt/puppetlabs/bin"
     puppet.environment_path = "environments"
     puppet.environment = "production"

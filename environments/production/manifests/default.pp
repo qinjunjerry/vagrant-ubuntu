@@ -2,5 +2,5 @@
 lookup('classes', {merge => unique}).include
 
 node default {
-	# look in hiera
+  # look in hiera
 }

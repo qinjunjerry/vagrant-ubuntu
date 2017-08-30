@@ -1,5 +1,5 @@
 # include classes from hiera
-hiera_include('classes')
+lookup('classes', {merge => unique}).include
 
 node default {
 	# look in hiera
